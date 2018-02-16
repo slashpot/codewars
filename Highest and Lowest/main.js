@@ -1,12 +1,8 @@
-"use strict";
-exports.__esModule = true;
-var Kata = /** @class */ (function () {
-    function Kata() {
+export class Kata {
+    static highAndLow(numbers) {
+        const result = document.getElementById("result");
+        result.innerText = "test";
     }
-    Kata.highAndLow = function (numbers) {
-        console.log("Hi");
-    };
-    return Kata;
-}());
-exports.Kata = Kata;
+}
 Kata.highAndLow("");
+//# sourceMappingURL=main.js.map
