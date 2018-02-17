@@ -7,9 +7,20 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Highest and Lowest",
-            "file": "${workspaceFolder}/Highest and Lowest/index.html",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attach Karma Chrome",
+            "address": "localhost",
+            "port": 9333,
+            "pathMapping": {
+                "/": "${workspaceRoot}",
+                "/base/": "${workspaceRoot}/"
+            }
         }
     ]
 }
