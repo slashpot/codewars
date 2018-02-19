@@ -1,7 +1,10 @@
 export class G964 {
     //https://www.codewars.com/kata/54dc6f5a224c26032800005c/train/typescript
     /*
-    A bookseller has lots of books classified in 26 categories labeled A, B, ... Z. Each book has a code c of 3, 4, 5 or more capitals letters. The 1st letter of a code is the capital letter of the book category. In the bookseller's stocklist each code c is followed by a space and by a positive integer n (int n >= 0) which indicates the quantity of books of this code in stock.
+    A bookseller has lots of books classified in 26 categories labeled A, B, ... Z. 
+    Each book has a code c of 3, 4, 5 or more capitals letters. 
+    The 1st letter of a code is the capital letter of the book category.
+    In the bookseller's stocklist each code c is followed by a space and by a positive integer n (int n >= 0) which indicates the quantity of books of this code in stock.
 
     For example an extract of one of the stocklists could be:
 
@@ -27,7 +30,40 @@ export class G964 {
     Note:
     In the result codes and their values are in the same order as in M.
     */
-    public static stockList = (listOfArt, listOfCat) => {
-        // your code
+    public static stockList = (listOfArt: string[], listOfCat: string[]) => {
+        let output: string = "";
+        if (listOfArt.length === 0 || listOfCat.length === 0) {
+            return output;
+        }
+
+        const books = listOfArt.map(function (book) {
+            const bookInfo = book.split(" ");
+            return ({ catrgory: bookInfo[0][0], quantity: parseInt(bookInfo[1]) })
+        });
+
+        listOfCat.forEach(function (cat, catIndex) {
+            let sum = 0;
+            books.forEach(function (book, bookIndex) {
+                if (cat === book.catrgory) {
+                    sum += book.quantity
+                }
+            })
+            const result = catIndex === listOfCat.length - 1 ? "(" + cat + " : " + sum.toString() + ")" : "(" + cat + " : " + sum.toString() + ") - "
+            output = output.concat(result);
+        });
+        return output;
     }
+
+}
+
+class Book {
+    /**
+     *
+     */
+    constructor(catrgory: string, quantity: number) {
+        this.category = catrgory;
+        this.quantity = quantity;
+    }
+    public category: string;
+    public quantity: number;
 }
