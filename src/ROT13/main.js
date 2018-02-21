@@ -13,17 +13,25 @@ rot13("This is my first ROT13 excercise!" == "Guvf vf zl svefg EBG13 rkprepvfr!"
 */
 function rot13(str) {
     var output = '';
-    str.split('').forEach(function (char) { return function () {
-        console.log(decode(char));
+    str.split('').forEach(function (char) {
         output += decode(char);
-    }; });
+    });
     return output;
 }
 exports.rot13 = rot13;
 function decode(char) {
-    var num = parseInt(char);
-    if (num >= 41 && num <= 77) {
+    var num = char.charCodeAt(0);
+    if (isAtoM(num)) {
         num += 13;
     }
+    else if (isNtoZ(num)) {
+        num -= 13;
+    }
     return String.fromCharCode(num);
+}
+function isAtoM(num) {
+    return (num >= 65 && num <= 77) || (num >= 97 && num <= 109);
+}
+function isNtoZ(num) {
+    return (num >= 78 && num <= 90) || (num >= 110 && num <= 122);
 }

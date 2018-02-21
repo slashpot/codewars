@@ -11,23 +11,36 @@ rot13("EBG13 rknzcyr.") == "ROT13 example.";
 rot13("This is my first ROT13 excercise!" == "Guvf vf zl svefg EBG13 rkprepvfr!"
 */
 
-export class ROT {
-    private output:string = ''
-    
-    public rot13(str: string): string {
-        str.split('').forEach(this.setDecodeChar.bind(this))
-        return this.output
-    }
-
-    private setDecodeChar(char:string):void {
-        this.output += this.decode(char)
-    }
-
-    private decode(char: string): string {
-        let num: number = char.charCodeAt(0)
-        if (num >= 41 && num <= 77) {
-            num += 13
-        }
-        return String.fromCharCode(num)
-    }
+export function rot13(str: string): string {
+    let output: string = ''
+    str.split('').forEach(function (char) {
+        output += decode(char)
+    })
+    return output
 }
+
+function decode(char: string): string {
+    let num: number = char.charCodeAt(0)
+    num = convertWithASCII(num);
+    return String.fromCharCode(num)
+}
+
+function convertWithASCII(num: number) {
+    if (isAtoM(num)) {
+        num += 13;
+    }
+    else if (isNtoZ(num)) {
+        num -= 13;
+    }
+    return num;
+}
+
+function isAtoM(num) {
+    return (num >= 65 && num <= 77) || (num >= 97 && num <= 109)
+}
+
+function isNtoZ(num) {
+    return (num >= 78 && num <= 90) || (num >= 110 && num <= 122)
+}
+
+
